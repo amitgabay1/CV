@@ -1,0 +1,51 @@
+*{
+    box-sizing: border-box;
+}
+
+.row:after{
+    content : "";
+    clear: both;
+    display: block;
+}
+    [class*="col-"]{
+    float: right;
+    padding: 15px;
+    }
+
+/* For desktop: */
+.col-1 {width: 18%;}
+.col-2 {width: 82%;}
+.col-3 {width: 100%;}
+
+  @media only screen and (max-width: 1000px){
+    /* For mobile phones: */
+    [class*="col-"]{
+     width: 100%;
+    }
+    [class="col-1"]{
+     height: 50px;
+    }
+  }
+
+  .header {
+    background-color: rgb(31, 112, 199);
+    padding: 40px;
+  }
+  .menu {
+    background-color: rgb(140, 146, 146);
+    padding: 100px;
+    height: 600px;
+  }
+
+  .main1 {
+    background-color: rgb(122, 167, 220);
+    padding: 100px;
+    height: 300px;
+  }
+
+    .main2{
+    background-color: rgb(200, 233, 252);
+    padding: 100px;
+    height: 300px;
+  }
+
