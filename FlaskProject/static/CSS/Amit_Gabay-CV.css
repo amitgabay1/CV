@@ -1,5 +1,5 @@
 .mainCv{
-  background-image: url(cv_background.PNG), url("white.PNG");
+  background-image: url(../Img/cv_background.PNG), url("../Img/white.PNG");
   background-size: 100%;
   background-repeat: no-repeat, repeat;
 }
