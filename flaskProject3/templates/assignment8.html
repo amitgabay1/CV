@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>‘assignment8</title>
+    {% include('Include.html') %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+
+     <div>
+         {% set user= {'firstname': "amit" ,'lastname':"gabay"}%}
+         <h1>  {{ user.firstname }} {{ user.lastname }} hobbies</h1>
+     <ul>
+    {% block body %}
+    {% for hobby in hobbies %}
+        <h3> {{ hobby }}</h3>
+     {% endfor %}
+     </ul>
+         {% set KM= {'KM of Running': "10km" }%}
+        {% if  KM%}
+            <h4>You run enough  </h4>
+        {% else %}
+            <h4>You have not run enough</h4>
+        {% endif %}
+     {% endblock %}
+    </div>
+</body>
+
+</html>
