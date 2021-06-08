@@ -8,6 +8,7 @@
     <orderEntry type="module" module-name="web-project-g3" />
   </component>
   <component name="TemplatesService">
+    <option name="TEMPLATE_CONFIGURATION" value="Jinja2" />
     <option name="TEMPLATE_FOLDERS">
       <list>
         <option value="$MODULE_DIR$/FlaskProject/templates" />
