@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>assignment 9</title>
+     {% include('include.html') %}
 </head>
 <body>
-{% include ('header.html') %}
     <h2>The method of this request is: {{ request_method }}</h2>
     Form:
     <form method="GET" action ="/assignment9">
@@ -43,7 +43,7 @@
             {% else %}
             <h2> Hey, Stranger !</h2>
 {% endif %}
-        POST form:
+     form:
     <form method="POST" action ="/assignment9">
     <label for="username">Username:</label>
     <input id='username' name="username"><br><br>

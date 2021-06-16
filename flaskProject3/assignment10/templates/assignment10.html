@@ -2,22 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>assignment10</title>
 </head>
 <body>
-    {%  with messages= get_flashed_messages()%}
-        {% if  messages %}
-            {% for message in messages%}
-            <h2> {{ message }}</h2>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-    {% include('insert_user.html') %}
 
-    {% include('assignment9.html') %}
-    <br><br>
-    <a href="/Amit_Gabay-CV">
-        <button class="back" style="margin: 0px;" type="button">back to CV</button>
-    </a>
+<h1> users list:</h1>
+<ul>
+    {% for user in users %}
+    <li> {{ user }}</li>
+    {% endfor %}
+</ul>
+<h1> Add new User</h1>
+    <form method="post" action="/Add_user">
+        <label for="username"> user name:</label>
+        <input name="username" id="username">
+        <label for="Email"> Email:</label>
+        <input name="Email" id="Email">
+        <label for="Password"> Password:</label>
+        <input name="Password" id="Password">
+        <input type="submit" value="Add">
+    </form>
+<h1> delete user:</h1>
+<form method="post" action="/delete_user">
+    <input name="username" type="text" placeholder="enter the user name">
+    <input type="submit" value="delete">
+</form>
+<h1>Update user</h1>
+  <form method="post" action="/update_user">
+        <label for="username"> user name:</label>
+        <input name="username" id="username">
+        <label for="Email"> Email:</label>
+        <input name="Email" id="Email">
+        <label for="Password"> Password:</label>
+        <input name="Password" id="Password">
+        <input type="submit" value="Update">
+    </form>
 </body>
 </html>

@@ -1,4 +1,4 @@
-import mysql
+import mysql.connector
 from flask import Flask, url_for, session
 from flask import render_template, request , redirect
 
@@ -47,18 +47,16 @@ def assignment9():
 
     return render_template('assignment9.html',
                            request_method=request.method,
-                           name = name,
-                           Users = Users,
-                           username = username)
+                           name=name,
+                           Users=Users,
+                           username=username)
 
 @app.route('/log_out')
 def log_out():
     session.pop('username')
     session['logged_in'] = False
-    return redirect('/assignment9')
+    return redirect('assignment9')
 
-from assignment10.assignment10 import assignment10
-app.register_blueprint(assignment10)
 
 
 def interact_db(query, query_type: str):
@@ -66,7 +64,7 @@ def interact_db(query, query_type: str):
     connection = mysql.connector.connect(host='localhost',
                                          user='root',
                                          passwd='root',
-                                         database='cv_db')
+                                         database='schema_users')
     cursor = connection.cursor(named_tuple=True)
     cursor.execute(query)
 
@@ -81,6 +79,14 @@ def interact_db(query, query_type: str):
     connection.close()
     cursor.close()
     return return_value
+
+from assignment10.assignment10 import assignment10
+app.register_blueprint(assignment10)
+
+from assignment11.assignment11 import assignment11
+app.register_blueprint(assignment11)
+
+
 
 if __name__ == '__main__':
     app.run()

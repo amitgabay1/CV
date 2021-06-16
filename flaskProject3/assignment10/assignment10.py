@@ -1,7 +1,11 @@
 from flask import  Blueprint, render_template, request, url_for, redirect, flash
-import mysql.connector
+import mysql
 
-assignment10 =  Blueprint('assignment10', __name__,
+
+# assignment10 blueprint
+
+
+assignment10 = Blueprint('assignment10', __name__,
                           static_folder='static',
                           static_url_path='/assignment10',
                           template_folder='templates')
@@ -12,7 +16,7 @@ def interact_db(query, query_type: str):
     connection = mysql.connector.connect(host='localhost',
                                          user='root',
                                          passwd='root',
-                                         database='cv_db')
+                                         database='schema_users')
     cursor = connection.cursor(named_tuple=True)
     cursor.execute(query)
 
@@ -28,37 +32,43 @@ def interact_db(query, query_type: str):
     cursor.close()
     return return_value
 
-@assignment10.route('/assignment10', methods=['GET', 'POST'])
+# routes
+@assignment10.route('/assignment10')
 def users():
     query = "select * from users"
     query_result = interact_db(query, query_type='fetch')
     return render_template('assignment10.html', users=query_result)
 
-@assignment10.route('/insert_user', methods=['GET', 'POST'])
-def insert_user():
-        if request.method == 'POST':
-            username = request.form['username']
-            Password = request.form['Password']
-            query = "INSERT INTO users(username, Password) VALUES ('%s', '%s', '%s')" % (username, Password)
-            interact_db(query=query, query_type='commit')
-            flash('You were successfully insert new user')
-        return redirect('/assignment10')
 
-@assignment10.route('/delete_user', methods=['GET', 'POST'])
+@assignment10.route('/Add_user', methods=['GET', 'POST'])
+def insert_user():
+    if request.method == 'POST':
+        username = request.form['username']
+        Email = request.form['Email']
+        Password = request.form['Password']
+        query = "INSERT INTO users(username,Email, Password) VALUES ('%s', '%s', '%s')" % (username, Email, Password)
+        interact_db(query=query, query_type='commit')
+        #  flash('You were successfully insert new user')
+        return redirect('/assignment10')
+        return render_template('assignment10.html', requemeth=request.method)
+
+
+@assignment10.route('/delete_user', methods=['POST'])
 def delete_user():
-    if request.method =='GET':
-        user_name =request.args['username']
+        user_name = request.form['username']
         query = "DELETE FROM users Where username='%s';" % user_name
         interact_db(query=query, query_type='commit')
-        flash('You were successfully delete user')
+        # flash('You were successfully delete user')
         return redirect('/assignment10')
+        return render_template('assignment10.html', requemeth=request.method)
 
-@assignment10.route('/update_user', methods=['GET', 'POST'])
+@assignment10.route('/update_user', methods=['POST'])
 def update_user():
-    if request.method == 'GET':
-        username = request.args['username']
-        Password = request.args['Password']
-        query = "UPDATE users SET username = %s WHERE Password= %s" % (username, Password)
+        username = request.form['username']
+        Email = request.form['Email']
+        Password = request.form['Password']
+        query = "UPDATE users SET username= '%s', Password = '%s' WHERE Email= '%s'" % (username, Password ,Email)
         interact_db(query=query, query_type='commit')
-        flash('You were successfully update  the user with the Password- %s' % Password)
+        #flash('You were successfully update  the user with the Password- %s' % Password)
         return redirect('/assignment10')
+        return render_template('assignment10.html', requemeth=request.method)
